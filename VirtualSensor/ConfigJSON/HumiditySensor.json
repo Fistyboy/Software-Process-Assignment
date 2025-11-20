@@ -1,0 +1,7 @@
+﻿{
+  "name": "DC-Humidity-01",
+  "unit": "DataCentreRoomA",
+  "minValue": 40.0,
+  "maxValue": 60.0,
+  "sampleRate": 1000
+}

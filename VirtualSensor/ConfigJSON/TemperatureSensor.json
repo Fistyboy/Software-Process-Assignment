@@ -2,7 +2,6 @@
   "name": "DC-Temp-01",
   "unit": "DataCentreRoomA",
   "minValue": 22.0,
-  "maxValue": 24.0,
+  "maxValue": 28.0,
   "sampleRate": 1000
 }
-

@@ -1,44 +1,68 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
+using SensorSim.Config;
+using SensorSim.Domain;
+using SensorSim.Services;
 
-namespace Sensors
+namespace SensorSim
 {
-    internal static class Program
+    internal class Program
     {
         private static readonly Random Random = new();
 
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-
-            string sensorName = "testSensor";
-
-            // TODO: needs to initialize name from file
-            
-            Console.WriteLine($"Simulation started for sensor : {sensorName}");
-
-
-
-
-            // simulation loop
-            while (true)
+            // 🔹 Load multiple configs
+            var configs = new[]
             {
-                double tempC = GenerateTemperature();
-                Console.WriteLine($"{DateTime.Now:HH:mm:ss}  Temperature: {tempC:F1} °C");
-                Thread.Sleep(1000);
-                var reading = new SensorData();
-                reading.SensorName = sensorName;
-                reading.DateTime = DateTime.Now;
-                reading.Value = tempC;
-              
+                ConfigLoader.Load("ConfigJSON/TemperatureSensor.json"),
+                ConfigLoader.Load("ConfigJSON/HumiditySensor.json")
+            };
 
+            var storage = new StorageService();
+
+            foreach (var config in configs)
+            {
+                Console.WriteLine($"Sensor simulation started for sensor: {config.Name}");
+
+                int count = 0;
+                while (count < 10) // run 10 readings per sensor
+                {
+                    double value = GenerateSensorValue(config.MinValue, config.MaxValue);
+
+                    var reading = new SensorReading
+                    {
+                        SensorId = config.Name,
+                        Location = config.Unit,
+                        Value = value,
+                        Timestamp = DateTime.Now
+                    };
+
+                    reading.IsValid = SensorValidator.IsValid(reading, config);
+                    reading.IsAnomaly = SensorValidator.IsAnomalous(reading, config);
+
+                    storage.Store(reading);
+
+                    Console.WriteLine($"[{reading.Timestamp:O}] {reading.SensorId} @ {reading.Location} = {reading.Value:N1}");
+
+                    if (!reading.IsValid)
+                        Console.WriteLine("⚠️ Invalid reading!");
+
+                    if (reading.IsAnomaly)
+                        Console.WriteLine("🚨 Anomaly detected!");
+
+                    Thread.Sleep(config.SampleRate);
+                    count++;
+                }
+
+                Console.WriteLine($"{config.Name}: Simulation complete. Check sensors.db for results.");
             }
         }
 
-        private static double GenerateTemperature()
+        private static double GenerateSensorValue(double min, double max)
         {
-            const double mean = 22.0;
-            const double variation = 5.0;
-            return mean + (Random.NextDouble() * 2 - 1) * variation;
+            return min + Random.NextDouble() * (max - min);
         }
     }
 }

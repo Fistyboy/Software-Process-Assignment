@@ -9,5 +9,8 @@
         public DateTime Timestamp { get; set; }
         public bool IsValid { get; set; }
         public bool IsAnomaly { get; set; }
+
+        public double Value { get; set; }
+
     }
 }
