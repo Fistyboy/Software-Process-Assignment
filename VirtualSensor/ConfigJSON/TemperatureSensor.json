@@ -1,6 +1,7 @@
 ﻿{
   "name": "DC-Temp-01",
   "unit": "DataCentreRoomA",
+  "unitType": "°C",
   "minValue": 22.0,
   "maxValue": 28.0,
   "sampleRate": 1000

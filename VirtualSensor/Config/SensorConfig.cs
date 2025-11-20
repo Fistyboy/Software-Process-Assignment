@@ -9,6 +9,9 @@ public class SensorConfig
     [JsonPropertyName("unit")]
     public string Unit { get; set; } = string.Empty;
 
+    [JsonPropertyName("unitType")]
+    public string UnitType { get; set; } = string.Empty;
+
     [JsonPropertyName("minValue")]
     public double MinValue { get; set; }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 using SensorSim.Config;
 using SensorSim.Domain;
 using SensorSim.Services;
@@ -13,15 +15,22 @@ namespace SensorSim
 
         static void Main(string[] args)
         {
-            // 🔹 Load multiple configs
-            var configs = new[]
+            // 🔹 Step 1: Load all JSON config files dynamically from ConfigJSON folder
+            string configFolder = "ConfigJSON";
+            var configFiles = Directory.GetFiles(configFolder, "*.json");
+
+            var configs = new List<SensorConfig>();
+            foreach (var path in configFiles)
             {
-                ConfigLoader.Load("ConfigJSON/TemperatureSensor.json"),
-                ConfigLoader.Load("ConfigJSON/HumiditySensor.json")
-            };
+                Console.WriteLine($"Loading config: {Path.GetFileName(path)}");
+                var config = ConfigLoader.Load(path);
+                ConfigValidator.Validate(config);
+                configs.Add(config);
+            }
 
             var storage = new StorageService();
 
+            // 🔹 Step 2: Loop through each sensor config and simulate readings
             foreach (var config in configs)
             {
                 Console.WriteLine($"Sensor simulation started for sensor: {config.Name}");
@@ -44,7 +53,7 @@ namespace SensorSim
 
                     storage.Store(reading);
 
-                    Console.WriteLine($"[{reading.Timestamp:O}] {reading.SensorId} @ {reading.Location} = {reading.Value:N1}");
+                    Console.WriteLine($"[{reading.Timestamp:O}] {reading.SensorId} @ {reading.Location} = {reading.Value:N1}{config.UnitType}");
 
                     if (!reading.IsValid)
                         Console.WriteLine("⚠️ Invalid reading!");
@@ -60,6 +69,7 @@ namespace SensorSim
             }
         }
 
+        // 🔹 Step 3: Random value generator for sensor readings
         private static double GenerateSensorValue(double min, double max)
         {
             return min + Random.NextDouble() * (max - min);
