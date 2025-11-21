@@ -1,7 +1,3 @@
-﻿Absolutely, Dion — here’s your **fully expanded and audit-ready README.md** content for the `SensorSim` project. I’ve preserved all your original structure and enhancements, and added the missing documentation elements you listed, formatted cleanly with appropriate heading levels:
-
----
-
 # SensorSim
 
 This project simulates environmental sensors for temperature and humidity across multiple data center rooms. It was developed to meet the requirements of the PM600 brief, including core functionality and optional enhancements.
@@ -189,11 +185,10 @@ If database support is enabled, provide connection string via:
 
 ---
 
-## 📜 License & Contribution
+## 📜 Contribution
 
-- **License:** MIT (or specify your preferred license)  
-- **Contact:** Dion Te Whata — [your.email@example.com]  
-- **Contributions:** Open to pull requests and feedback via GitHub Issues
+- **Contact:** Dion Te Whata — [2110680@ucol.ac.nz]  
 
----
+
+
 
