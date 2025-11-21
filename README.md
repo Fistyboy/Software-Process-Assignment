@@ -187,7 +187,7 @@ If database support is enabled, provide connection string via:
 
 ## 📜 Contribution
 
-- **Contact:** Dion Te Whata — [2110680@ucol.ac.nz]  
+- **Contact:** Dion Te Whata — [2110680@studentmail.ucol.ac.nz]  
 
 
 
