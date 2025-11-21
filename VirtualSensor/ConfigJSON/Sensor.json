@@ -1,6 +1,6 @@
 ﻿{
-  "name": "DC-Temp-01",
-  "unit": "DataCentreRoomA",
+  "name": "DC-Temp-Check 1",
+  "unit": "Data Centre Room B",
   "minValue": 22.0,
   "maxValue": 24.0,
   "sampleRate": 1000

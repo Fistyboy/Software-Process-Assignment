@@ -1,6 +1,6 @@
 ﻿{
-  "name": "DC-Temp-01",
-  "unit": "DataCentreRoomA",
+  "name": "DC-Temp-Check2",
+  "unit": "Data Centre Room C",
   "unitType": "°C",
   "minValue": 22.0,
   "maxValue": 28.0,
