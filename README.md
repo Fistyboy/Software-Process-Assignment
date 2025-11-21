@@ -1,4 +1,8 @@
-﻿# SensorSim
+﻿Absolutely, Dion — here’s your **fully expanded and audit-ready README.md** content for the `SensorSim` project. I’ve preserved all your original structure and enhancements, and added the missing documentation elements you listed, formatted cleanly with appropriate heading levels:
+
+---
+
+# SensorSim
 
 This project simulates environmental sensors for temperature and humidity across multiple data center rooms. It was developed to meet the requirements of the PM600 brief, including core functionality and optional enhancements.
 
@@ -42,78 +46,154 @@ This project simulates environmental sensors for temperature and humidity across
 
 ---
 
+## 🛠 Setup & Run Instructions
+
+### Open in Visual Studio
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/yourusername/SensorSim.git
+   ```
+2. Open `SensorSim.sln` in Visual Studio.
+3. Build the solution (`Ctrl+Shift+B`) and run (`F5` or `Ctrl+F5`).
+
+### Run via CLI
+```bash
+dotnet build
+dotnet run --project SensorSim
+```
+
+.NET Target:  
+This project targets **.NET 9**. Ensure your SDK is up to date.
+
+---
+
+## 🧾 Example JSON Config
+
+**File:** `ConfigJSON/DC-Temp-A.json`
+
+```json
+{
+  "name": "DC-Temp-A",
+  "unit": "DataCentreRoomA",
+  "unitType": "°C",
+  "minValue": 18,
+  "maxValue": 27,
+  "sampleRate": 1000
+}
+```
+
+### Schema Explanation
+- `name`: Unique sensor ID  
+- `unit`: Physical location  
+- `unitType`: Measurement unit (`°C`, `%RH`)  
+- `minValue` / `maxValue`: Valid range  
+- `sampleRate`: Interval in milliseconds between readings
+
+---
+
+## 📤 Sample Output
+
+**Console Output:**
+```
+[2025-11-21 14:03:12] DC-Temp-A | DataCentreRoomA | 26.8°C | VALID
+[2025-11-21 14:03:13] DC-Temp-A | DataCentreRoomA | 28.5°C | ANOMALY
+```
+
+**sensors.txt:**
+```
+2025-11-21T14:03:12Z,DC-Temp-A,DataCentreRoomA,26.8,°C,VALID
+2025-11-21T14:03:13Z,DC-Temp-A,DataCentreRoomA,28.5,°C,ANOMALY
+```
+
+---
+
 ## 📂 Project Components
 
 ### ConfigJSON/
-Holds all sensor configuration files in JSON format.  
-Each file defines:
-- `name` — Sensor identifier (e.g., DC-Temp-A)
-- `unit` — Location (e.g., DataCentreRoomA)
-- `unitType` — Measurement unit (°C, %RH)
-- `minValue` / `maxValue` — Valid range
-- `sampleRate` — Sampling interval in ms
-
----
+Holds all sensor configuration files in JSON format.
 
 ### Domain/
-Contains sensor models and validation logic.  
-Key files:
-- `SensorConfig.cs` — Maps JSON properties to C# objects
-- `SensorReading.cs` — Represents a single sensor reading
-- `SensorValidator.cs` — Validates readings and detects anomalies
-
----
+Contains sensor models and validation logic.
 
 ### Services/
-Implements supporting services for the simulation.  
-- `ConfigLoader.cs` — Loads JSON configs into `SensorConfig`
-- `StorageService.cs` — Persists readings to `sensors.txt` or database
-
----
+Implements supporting services for config loading and data persistence.
 
 ### Tests/
-Unit tests for validation and config loading.  
-Ensures:
-- Configs are parsed correctly
-- Invalid/malformed configs are caught
-- Readings outside thresholds are flagged
-
----
+Unit tests for validation and config loading.
 
 ### SensorSim.sln
-The Visual Studio solution file.  
-Open this to build and run the project.
-
----
+Visual Studio solution file.
 
 ### Program.cs
-Main simulation logic.  
-- Loads configs from `ConfigJSON/`
-- Generates random sensor values within defined ranges
-- Validates and flags anomalies
-- Outputs results to console and storage
-
----
+Main simulation logic.
 
 ### sensors.txt
-Output file containing recorded readings.  
-Includes:
-- Timestamp
-- Sensor ID
-- Location
-- Value + UnitType
-- Flags for invalid or anomalous readings
+Stores output readings. Located in the project root. Appends new readings; no rotation logic implemented.
+
+### README.md
+Project documentation.
 
 ---
 
-### README.md
-Project documentation.  
-Explains:
-- Purpose
-- Features
-- Setup instructions
-- Sample output
-- Future improvements
+## 🧪 Build & Test Commands
+
+```bash
+dotnet build
+dotnet test
+```
+
+Tests cover:
+- Config parsing
+- Validation logic
+- Anomaly detection thresholds
+- Edge cases (nulls, outliers, repeated values)
+
+---
+
+## 📁 Config File Placement
+
+- Default path: `SensorSim/ConfigJSON/`
+- Override via CLI argument:  
+  ```bash
+  dotnet run --project SensorSim --configPath="path/to/configs"
+  ```
+
+---
+
+## 💾 Persistence Details
+
+- **File:** `sensors.txt` in project root  
+- **Format:** CSV with timestamp, sensor ID, location, value, unit, and status  
+- **Behavior:** Appends new readings; no rotation or archival  
+- **Database Support:** Placeholder available in `StorageService.cs` for future DB integration (e.g., SQL connection string via environment variable)
+
+---
+
+## 🐞 Error Handling & Logging
+
+- Logs printed to console with timestamp and severity.
+- Verbosity can be adjusted in `Program.cs` (e.g., toggle anomaly-only mode).
+- Future enhancement: redirect logs to file or external logging service.
+
+---
+
+## 🔐 Environment Variables & Secrets
+
+If database support is enabled, provide connection string via:
+
+- `appsettings.json`  
+- Environment variable:  
+  ```bash
+  export DB_CONNECTION="your_connection_string"
+  ```
+
+---
+
+## 📜 License & Contribution
+
+- **License:** MIT (or specify your preferred license)  
+- **Contact:** Dion Te Whata — [your.email@example.com]  
+- **Contributions:** Open to pull requests and feedback via GitHub Issues
 
 ---
 
