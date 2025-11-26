@@ -8,7 +8,7 @@ using SensorSim.Domain;
 using SensorSim.Services;
 
 namespace SensorSim
-{
+{ 
     internal class Program
     {
         private static readonly Random Random = new();
