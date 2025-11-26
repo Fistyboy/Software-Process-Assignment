@@ -1,37 +1,86 @@
-Final Reflection Report
-====
-This reflection is written for my Software Process class, where I was tasked with completing an individual project assignment that combined technical development with project management practices. My name is Dion Te Whata, a 41‑year‑old student who has come to programming later in life. Balancing this project alongside three exams was stressful, and the time pressure added to my anxiety. Despite these obstacles, I was able to complete the assignment in a single 12‑hour day, which surprised me and gave me confidence in my ability to manage intense workloads. This report outlines how I approached the technical requirements, integrated project management principles, and reflected on my learning outcomes.
+# Final Reflection Report
 
-### LinkedIn Learning Coursework ###
+## Introduction  
+At the beginning of this course, I aimed to improve my technical skills and confidence in programming. I was particularly interested in understanding how professional developers manage code, collaborate, and maintain version control. My goal was to build a defensible, well-structured project using GitHub and Visual Studio.  
 
-A significant part of the assignment involved completing the LinkedIn Learning courses Learning Git and GitHub and C# Unit Testing with xUnit. These courses were time‑consuming and contributed to my anxiety, but they provided essential knowledge that directly supported the project. To stay organized, I tracked each course in my GitHub Kanban board. Each issue represented a course topic, and I broke down the smaller videos into individual checkboxes. This gave me a sense of progress as I ticked off each video, even when the workload felt heavy. The courses helped me refresh fundamentals I had not touched since earlier programming classes, and they gave me practical skills in Git workflows and unit testing.
+Since I am very new to GitHub, I haven’t always been confident that I’ve done everything I was meant to, and definitely not in the exact order. This made the learning curve steeper, but it also gave me valuable experience in troubleshooting and adapting when things didn’t go as planned.
 
-### Feature Development ### 
-The sensor simulation was built by dividing the problem into modules: configuration, data generation, validation, logging, and anomaly detection. Initialization loaded sensor metadata from a configuration file, with fail‑fast validation to stop errors early. Data simulation introduced variability to mimic real‑world conditions, while validation checked ranges and flagged anomalies. Logging captured both normal and fault conditions, and anomaly detection used a moving average to identify spikes or sensor failures. Structuring the work into components gave me a roadmap to follow and kept the 12‑hour sprint manageable.
+---
 
-### Testing Practices ### 
-Using xUnit, I created unit tests around the most fragile parts: configuration parsing, validation rules, and anomaly detection. Edge cases included null values, extreme outliers, and repeated identical readings to simulate sensor faults. By seeding random generators, I kept tests deterministic and reliable. Running these tests during the build gave me confidence that rapid changes did not silently break functionality. This reflected project management principles of quality assurance under time pressure — testing became my safeguard against rushing mistakes in a compressed schedule.
+## LinkedIn Learning Coursework  
+I completed LinkedIn Learning modules on Git and GitHub, which helped me understand branching, commits, pull requests, and tagging. I also explored Visual Studio integration with Azure DevOps, which clarified how teams manage repositories and enforce workflows. These courses gave me a strong foundation in collaborative development and version control.
 
-### Documentation ### 
-I produced a README with setup instructions, architecture overview, and function descriptions. Configuration keys were documented with examples, and I included notes on running the test suite and interpreting results. This documentation ensured that even though the project was completed quickly, the outcome was transparent and reproducible. In project management terms, this satisfied communication management, showing that clear documentation can substitute for extended stakeholder meetings when time is limited.
+---
 
-### Learning Outcomes ### 
-From the ICT perspective, I strengthened my technical skills in .NET development, Git workflows, and unit testing. From the Software Process and Project Management course, I applied principles such as:
+## Testing Practices  
+Throughout the project, I applied unit testing to validate sensor configuration logic and reading ranges. Integration testing ensured that sensor simulation and logging worked together correctly. System testing confirmed that the full pipeline — from config loading to reading storage — behaved as expected. This reinforced the importance of testing in maintaining software reliability.
 
-- Time management: Completing the project in one 12‑hour session required strict focus and prioritization.
+---
 
-- Progress tracking: GitHub’s burndown chart and Kanban board gave me real‑time visibility of progress,       mirroring agile tracking tools.
+## Configuration Management  
+I learned to manage changes using Git branches and tags. Each feature was developed in its own branch (e.g., `feature/init`, `feature/log-store`) and merged into `develop` via pull requests. I used conventional commit messages (`feat:`, `fix:`, `test:`) and tagged the final milestone as `v1.0`. This structure made the project audit-ready and easy to track.
 
-- Risk management: Identifying potential failure points (config errors, anomalies) and mitigating them        through validation and testing reduced the chance of late‑stage breakdowns.
-  
-- Quality management: Frequent commits, automated tests, and structured documentation ensured quality         despite the compressed timeline.
+---
 
-- Stakeholder communication: Using GitHub commits, Kanban boards, and burndown tracking provided evidence     of progress without needing extended reporting cycles.
+## Git Usage  
+- **Branching Strategy**:  
+  Used `main` (protected), `develop`, and multiple `feature/` branches for modular development.  
+- **Feature Branches**:  
+  - `feature/init`: Sensor initialization logic  
+  - `feature/simulate`: Temperature and humidity simulation  
+  - `feature/log-store`: Logging and storing sensor readings  
+  - `feature/validate`: Validation of sensor data structure  
+  - `feature/tests`: Unit tests for sensor initialization  
+- **Pull Requests**:  
+  Each feature branch was merged into `develop` via pull requests. Descriptions included summaries, reasons, and file changes.  
+- **Tagging**:  
+  Tag `v1.0` was created and pushed to `main`. A GitHub release was published to mark the milestone.  
 
-- This showed me that even in a single‑day sprint, project management tools and principles can guide          technical work and keep it defensible.
+Because I am new to GitHub, I often felt unsure whether I was following the exact workflow correctly. Sometimes I completed steps out of order, but I learned that Git allows recovery and correction, and documenting these steps helped me stay accountable.
 
-### Critical Insight ### 
-The hardest part was sustaining focus and managing stress during a 12‑hour build, especially after the time‑consuming LinkedIn Learning courses. Breaking the work into modules and watching the GitHub burndown chart drop gave me motivation and structure. The Kanban board also helped me visualize progress across both the coursework and the coding. Technically, anomaly detection was challenging, but treating it as a risk management exercise helped me design thresholds and fault flags systematically. Testing exposed hidden assumptions, reinforcing the lesson that quality must be built in, even under time pressure. Next time, I would prepare more upfront (config templates, test scaffolding) to reduce setup time, and integrate continuous integration earlier to automate quality checks. This would make the sprint smoother and strengthen both my technical workflow and my ability to manage projects under intense deadlines.
+---
 
-### Conclusion ### 
-Completing this Software Process project was both stressful and rewarding. The LinkedIn Learning courses consumed time and added to my anxiety, but they provided essential skills that supported the assignment. The one‑day sprint tested my focus and resilience, and GitHub’s burndown chart and Kanban board gave me structure and visibility. By combining technical development with project management principles, I delivered a working application, documented it clearly, and reflected critically on my process. This experience has shown me that even under pressure, structured planning, quality assurance, and transparent communication can lead to successful outcomes.
+## Feature Development  
+Each feature was isolated in its own branch and committed with meaningful messages:
+- `feature/init`: Added config validation logic in `SensorSim/Config/ConfigValidator.cs`
+- `feature/simulate`: Simulated readings in `SensorSim/Program.cs`
+- `feature/log-store`: Implemented logging in `SensorSim/Services/StorageServices.cs`
+- `feature/validate`: Defined validation rules in `SensorSim/Domain/SensorReading.cs`
+- `feature/tests`: Created unit tests in `Tests/VirtualSensorTests.cs`
+
+---
+
+## Challenges  
+- Merge conflict between `feature/log-store` and `develop` due to overlapping edits  
+- JSON config validation failed when `unitType` was missing  
+- GitHub README didn’t render correctly due to duplicate files  
+- Time management during testing and branching setup was critical  
+
+---
+
+## Milestone Tag  
+- Tag `v1.0` was created on `main` using:
+  ```bash
+  git checkout main
+  git pull origin main
+  git tag v1.0
+  git push origin v1.0
+  ```
+- A GitHub release was published with the title `v1.0` and a summary of core features  
+- This marks the completion of the project and aligns with the assessment brief
+
+---
+
+## Critical Insight  
+The most challenging aspect was managing time across branching, testing, and documentation. I learned that structured planning and collaboration are essential. Using GitHub’s pull request workflow helped me stay organized and produce a defensible, transparent codebase.  
+
+As someone new to GitHub, I wasn’t always confident I was doing things in the right order, but this uncertainty forced me to slow down, document carefully, and learn by correcting mistakes. That process gave me a deeper understanding of version control and confidence that I can now apply in future projects.
+
+---
+
+## Conclusion  
+This project helped me integrate technical skills with professional workflows. I now understand how to build audit-ready software using Git, GitHub, and Visual Studio. The LinkedIn Learning modules and hands-on development gave me confidence in version control, testing, and configuration management. Even though I was new to GitHub and sometimes unsure of the order of steps, I learned that persistence and documentation can overcome those gaps. I’m proud of the structure and clarity of my final submission.
+
+---
+
+
