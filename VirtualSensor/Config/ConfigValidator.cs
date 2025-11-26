@@ -2,7 +2,7 @@
 using System.IO;
 
 namespace SensorSim.Config
-{
+{ 
     public static class ConfigValidator
     {
         public static void Validate(SensorConfig config)
