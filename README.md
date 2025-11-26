@@ -188,7 +188,7 @@ If database support is enabled, provide connection string via:
 ## 📜 Contribution
 
 - **Contact:** Dion Te Whata — [2110680@studentmail.ucol.ac.nz]  
-Pls Note: In the main branch there is a folder that has updated Final Report there that isn't it i didn't want to risk getting rid of it and losing anything, so the Final Report is the one just above the README file name Final Report.md
+- Pls Note: In the main branch there is a folder that has updated Final Report there that isn't it i didn't want to risk getting rid of it and losing anything, so the Final Report is the one just above the README file name Final Report.md
 
 
 
